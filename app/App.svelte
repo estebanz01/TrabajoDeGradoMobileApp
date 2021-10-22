@@ -5,9 +5,11 @@
   import Sqlite from 'nativescript-sqlite';
 
   // We need to copy the database to a special folder in the device
-  if (!Sqlite.exists("database.sqlite")) {
-    Sqlite.copyDatabase("database.sqlite");
+  if (Sqlite.exists("database.sqlite")) {
+    Sqlite.deleteDatabase("database.sqlite");
   }
+
+  Sqlite.copyDatabase("database.sqlite");
 
   let user = null;
   let pass = null;
@@ -42,7 +44,7 @@
 //    navigate({ page: Inicio });
   };
 </script>
-<page>
+<page class="page">
     <stackLayout>
       <image src="~/images/planta.png" height="150"/>
       <label
@@ -60,7 +62,7 @@
         marginTop="3%"
         bind:text="{pass}"
         returnKeyType="done" />
-      <button text="Ingresar" class="-primary -outline" marginTop="20%" on:tap="{clickButton}" />
+      <button text="Ingresar" class="-success -outline btn" marginTop="20%" on:tap="{clickButton}" />
     </stackLayout>
 </page>
 
