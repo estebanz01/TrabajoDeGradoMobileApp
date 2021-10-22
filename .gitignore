@@ -31,5 +31,4 @@ typings/
 !.vscode/extensions.json
 
 *.tgz
-webpack.config.js
 package-lock.json
