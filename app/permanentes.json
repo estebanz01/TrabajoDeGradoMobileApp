@@ -1,0 +1,9 @@
+{
+  "Flores": ["Clavel", "Cordeline cinta", "Eucalipto Baby Blue", "Fitosporum", "Flor de safari", "Helecho", "Heliconia", "Hortensia", "Limonium", "Orquídea", "Palma robelina", "Protea", "Rosa", "Statice", "Tree Fern"],
+  "Forestales": ["Caucho"],
+  "Frutales": ["Agraz", "Aguacate", "Algarrobo", "Anón", "Arándano", "Araza", "Asai", "Bacuri", "Badea", "Bananito", "Banano Manzano", "Chiro", "Banano", "Banano Exportación", "Borojó", "Brevo", "Caducifolios", "Caimo", "Chamba", "Chirimoya", "Cholupa", "Chontaduro", "Ciruela", "Cítricos", "Coco", "Curuba", "Datil", "Durazno", "Feijoa", "Frambuesa", "Fresa", "Frutales varios", "Granadilla", "Guama", "Guanábana", "Guayaba", "Guayaba manzana", "Guayaba Pera", "Gulupa", "Higo", "Lima", "Lima Tahiti", "Limón", "Limón mandarino", "Limón pajarito", "Limón tahiti", "Lulo", "Macadamia", "Mamey", "Mamoncillo", "Mandarina", "Mandarina clementina", "Mandarina oneco", "Mango", "Mango injerto", "Mangostino", "Manzana", "Maracuyá", "Marañon", "Mora", "Naranja", "Naranja jaffa", "Naranja salustiana", "Naranja valencia", "Naranja washington navel", "Níspero", "Noni", "Papaya", "Papaya hawaiana", "Papayuela", "Pepa de pan", "Pera", "Piña", "Pitahaya", "Pomarrosa", "Pomelo", "Rambután", "Tamarindo", "Tangelo", "Tangelo mineola", "Tangelo orlando", "Tomate de árbol", "Toronja", "Uchuva", "Umarí", "Uva caimarona", "Zapote"],
+  "Leguminosas": ["Alfalfa", "Chachafruto", "Higuerilla", "Jatropha", "Palma de aceite", "Sacha Inchi"],
+  "Agroindustriales": ["Cacao", "Café", "Caña azucarera", "Caña miel", "Caña panelera"],
+  "Aromáticas": ["Canyarana", "Cardamomo", "Cocculus", "Curcuma", "Eneldo", "Hierbabuena", "Laurel", "Menta", "Moringa", "Orégano", "Pimienta", "Ruda", "Ruscus", "Sábila", "Stevia", "Tangarana", "Té", "Vainilla"],
+  "Plátanos": ["Cachacho", "Plátano", "Plátano exportación"]
+}

@@ -1,0 +1,12 @@
+{
+  "Cereales": ["Arroz", "Avena", "Cebada", "Centeno", "Maiz Forrajero", "Maiz Tradicional", "Millo", "Quinua", "Sorgo", "Trigo"],
+  "Fibras": ["Algodon", "Estropajo", "Esparto", "Fique", "Iraca", "Mimbre", "Palma Amarga"],
+  "Flores y Follajes": ["Girasol", "Gladiolo", "Pompón y cristantemo"],
+  "Frutales": ["Melon", "Patilla"],
+  "Hongos": ["Champi&ntilde;on", "Orellana"],
+  "Hortalizas": ["Acelga", "Ahuyama", "Ají", "Ají dulce", "Ají tabasco", "Ajo", "Alcachofa", "Apio", "Berenjena", "Calabacín", "Calabaza", "Cebolla de bulbo", "Cebolla de rama", "Cebollín", "Cilantro", "Col", "Coliflor", "Espárrago", "Espinaca", "Guatila", "Hortalizas varias", "Lechuga", "Nabo", "Pepino cohombro", "Pepino guiso", "Pimentón", "Puerro", "Rabano", "Remolacha", "Repollo", "Tomate", "Tomate invernadero", "Zanahoria", "Zucchini"],
+  "Leguminosas": ["Arverja", "Frijol", "Frijol Arbustivo", "Frijol Ladera", "Frijol Plana", "Frijol Voluble", "Garbanzo", "Haba", "Habichuela", "Lenteja", "Maní", "Soya", "Zaragoza"],
+  "Oleaginosas": ["Ajonjolí"],
+  "Aromáticas": ["Achicoria", "Achiote", "Albahaca", "Amaranto", "Anis", "Caléndula", "Chia", "Chillangua", "Chiraran", "Cimarrón", "Flor de jamaica", "Manzanilla", "Perejil", "Plantas aromáticas", "Poleo", "Romero", "Tomillo"],
+  "Tuberculos": ["Arracacha", "Batata", "Ñame", "Papa", "Papa criolla", "Ulluco", "Yacón", "Yuca", "Yuca industrial"]
+}
