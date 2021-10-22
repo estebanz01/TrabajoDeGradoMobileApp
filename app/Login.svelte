@@ -1,9 +1,3 @@
-<script>
-  import { navigate } from 'svelte-native'
-  import Inicio from './Inicio.svelte'
-
-  const clickButton = () => navigate({ page: Inicio });
-</script>
 <page>
     <stackLayout>
       <image src="~/images/planta.png" height="150"/>
@@ -17,7 +11,7 @@
         marginTop="3%" />
       <textField hint="Email" keyboardType="email" marginTop="3%" />
       <textField hint="Password" secure="true" marginTop="3%" />
-      <button text="Ingresar" class="-primary -outline" marginTop="20%" on:tap="{clickButton}" />
+      <button text="Ingresar" class="-primary -outline" marginTop="20%" />
     </stackLayout>
 </page>
 
