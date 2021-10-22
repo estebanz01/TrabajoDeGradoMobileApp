@@ -1,6 +1,11 @@
 <script>
-  const transitorios = require('~/transitorios.json');
-  const permanentes = require('~/permanentes.json');
+  import { alert } from '@nativescript/core/ui/dialogs';
+
+  const transitoriosJSON = require('~/transitorios.json');
+  const permanentesJSON = require('~/permanentes.json');
+
+  const tiposPermanentes = Object.keys(permanentesJSON);
+  const tiposTransitorios = Object.keys(transitoriosJSON);
 
   let tipoCosechas = ['', 'Permanente', 'Transitorio'];
   let tipoCultivos = [];
@@ -13,27 +18,51 @@
   const cargarTipoCultivo = () => {
     switch (tipoCosecha) {
       case 1:
-        tipoCultivos = Object.keys(permanentes);
+        tipoCultivos = tiposPermanentes;
         break;
       case 2:
-        tipoCultivos = Object.keys(transitorios);
+        tipoCultivos = tiposTransitorios;
         break;
       default:
         tipoCultivos = [];
         console.log('No option selected');
     }
+
+    cultivos = []; // Forzar la selección del tipo de cultivo.
   };
 
   const cargarCultivos = () => {
     if (tipoCosecha == 1) {
-      cultivos = permanentes[Object.keys(permanentes)[tipoCultivo]];
+      cultivos = permanentesJSON[tiposPermanentes[tipoCultivo]];
     } else if (tipoCosecha == 2) {
-      cultivos = transitorios[Object.keys(transitorios)[tipoCultivo]];
+      cultivos = transitoriosJSON[tiposTransitorios[tipoCultivo]];
     } else {
       cultivos = [];
     }
 
     console.log('cultivos');
+  };
+
+  const infoBtn = (evt) => {
+    const classes = evt.object.className.split(' ');
+
+    if (classes.includes('js-cosecha')) {
+      alert('La cosecha puede ser permanente (de largo plazo) o transitoria (corto plazo).');
+    } else if (classes.includes('js-tipo-cultivo')) {
+      alert('Seleccione una categoría de cultivo para ver las diferentes opciones de cultivo presentes.\nOpción vacía si no se ha seleccionado un tipo de cosecha.');
+    } else if (classes.includes('js-cultivo')) {
+      alert('Seleccione una de las opciones a continuación que representa a su producto cosechado final.');
+    }
+  };
+
+  const continuarBtn = () => {
+    if (tipoCosecha == 1) {
+      alert('Estamos trabajando fuertemente para implementar el cálculo de costos para cultivos permanentes. Pronto estará disponible.');
+    } else if (tipoCosecha == 2) {
+      console.log('OK, move on');
+    } else {
+      alert('Por favor, seleccione el tipo de cosecha.');
+    }
   };
 </script>
 <page>
@@ -46,42 +75,71 @@
       textWrap="true"
       fontSize="40em"
       marginTop="3%" />
-    <label
-      class="info"
-      text="Tipo de cosecha:"
-      horizontalAlignment="center"
-      verticalAlignment="middle"
-      textWrap="true"
-      fontSize="20em"
-      marginTop="10%" />
+    <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
+      <label
+        class="info"
+        text="Tipo de Cosecha:"
+        left="10"
+        top="10"
+        textWrap="true"
+        fontSize="20em" />
+      <button
+        left="140"
+        top="0"
+        text="&#xf05a;"
+        class="fas js-cosecha"
+        paddingTop="-10%"
+        strech="none"
+        on:tap="{infoBtn}" />
+    </absoluteLayout>
     <listPicker
       items="{tipoCosechas}"
       height="100"
       on:selectedIndexChange="{cargarTipoCultivo}"
       bind:selectedIndex="{tipoCosecha}" />
-    <label
-      class="info"
-      text="Tipo de Cultivo:"
-      horizontalAlignment="center"
-      verticalAlignment="middle"
-      textWrap="true"
-      fontSize="20em" />
+    <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
+      <label
+        class="info"
+        text="Tipo de Cultivo"
+        left="10"
+        top="10"
+        textWrap="true"
+        fontSize="20em" />
+      <button
+        left="140"
+        top="0"
+        text="&#xf05a;"
+        class="fas js-tipo-cultivo"
+        paddingTop="-10%"
+        strech="none"
+        on:tap="{infoBtn}" />
+    </absoluteLayout>
     <listPicker
       items="{tipoCultivos}"
       height="100"
       on:selectedIndexChange="{cargarCultivos}"
       bind:selectedIndex="{tipoCultivo}" />
-    <label
-      class="info"
-      text="Cultivo:"
-      horizontalAlignment="center"
-      verticalAlignment="middle"
-      textWrap="true"
-      fontSize="20em" />
+    <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
+      <label
+        class="info"
+        text="Cultivo"
+        left="10"
+        top="10"
+        textWrap="true"
+        fontSize="20em" />
+      <button
+        left="60"
+        top="0"
+        text="&#xf05a;"
+        class="fas js-cultivo"
+        paddingTop="-10%"
+        strech="none"
+        on:tap="{infoBtn}" />
+    </absoluteLayout>
     <listPicker
       items="{cultivos}"
       bind:selectedIndex="{cultivo}"
       height="100" />
-    <button text="Continuar" class="-primary -outline" />
+    <button text="Continuar" class="-primary -outline" on:tap={continuarBtn} />
   </stackLayout>
 </page>
