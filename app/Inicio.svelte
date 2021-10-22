@@ -4,7 +4,7 @@
 
   const cultivoTransitorio = () => navigate({ page: ExplotacionAgricola });
 </script>
-<page>
+<page class="body">
   <stackLayout>
     <gridLayout columns="300, 300" rows="100">
       <label
@@ -28,7 +28,7 @@
       text="Inicio"
       fontSize="20em"
       marginTop="10%" />
-    <button text="Estado del bien producido" class="-primary -outline" marginTop="20%" />
-    <button text="Estado de la naturaleza" class="-primary -outline" marginTop="3%" on:tap="{cultivoTransitorio}" />
+    <button text="Estado del bien producido" class="-success -outline btn" marginTop="20%" />
+    <button text="Estado de la naturaleza" class="-success -outline btn" marginTop="3%" on:tap="{cultivoTransitorio}" />
   </stackLayout>
 </page>

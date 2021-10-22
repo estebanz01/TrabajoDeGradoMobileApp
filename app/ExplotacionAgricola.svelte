@@ -1,5 +1,7 @@
 <script>
   import { alert } from '@nativescript/core/ui/dialogs';
+  import { navigate } from 'svelte-native';
+  import TablaDatos from './TablaDatos.svelte';
 
   const transitoriosJSON = require('~/transitorios.json');
   const permanentesJSON = require('~/permanentes.json');
@@ -59,13 +61,13 @@
     if (tipoCosecha == 1) {
       alert('Estamos trabajando fuertemente para implementar el cálculo de costos para cultivos permanentes. Pronto estará disponible.');
     } else if (tipoCosecha == 2) {
-      console.log('OK, move on');
+      navigate({ page: TablaDatos });
     } else {
       alert('Por favor, seleccione el tipo de cosecha.');
     }
   };
 </script>
-<page>
+<page class="body">
   <stackLayout>
     <label
       class="info"
@@ -140,6 +142,6 @@
       items="{cultivos}"
       bind:selectedIndex="{cultivo}"
       height="100" />
-    <button text="Continuar" class="-primary -outline" on:tap={continuarBtn} />
+    <button text="Continuar" class="-success -outline btn" on:tap={continuarBtn} />
   </stackLayout>
 </page>
