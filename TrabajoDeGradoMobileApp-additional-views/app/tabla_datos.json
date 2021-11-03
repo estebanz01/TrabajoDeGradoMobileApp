@@ -1,0 +1,26 @@
+{
+  "permanentes": [],
+  "transitorios": [
+    { "text": "la producción en toneladas", "id": "item1" },
+    { "text": "la devisación estándar de producción", "id": 2 },
+    { "text": "la cantidad de jornales", "id": 3 },
+    { "text": "los jornales", "id": 4 },
+    { "text": "los fertilizantes", "id": 5 },
+    { "text": "los insecticidas", "id": 6 },
+    { "text": "otros insumos", "id": 7 },
+    { "text": "asistencia técnica si es prestación por servicios", "id": 8 },
+    { "text": "asistencia técnica única vez", "id": 9 },
+    { "text": "arrendamiento", "id": 10 },
+    { "text": "los servicios públicos", "id": 11 },
+    { "text": "imprevistos", "id": 12 },
+    { "text": "impuestos", "id": 13 },
+    { "text": "depreciaciones", "id": 14 },
+    { "text": "transporte", "id": 15 },
+    { "text": "salarios de administración", "id": 16 },
+    { "text": "mantenimientos preventivos", "id": 17 },
+    { "text": "mantenimientos correctivos", "id": 18 },
+    { "text": "la cantidad de semillas compradas", "id": 19 },
+    { "text": "de cada semilla", "id": 20 },
+    { "text": "del uso estimado de la tierra", "id": 21 }
+  ]
+}
