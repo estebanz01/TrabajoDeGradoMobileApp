@@ -44,25 +44,27 @@
 //    navigate({ page: Inicio });
   };
 </script>
-<page class="page">
+<page class="page body">
+    <actionBar class="title" style="color: black;" title="Iniciar sesión" />
     <stackLayout>
-      <image src="~/images/planta.png" height="150"/>
+      <image class="mtop-32" src="~/images/planta.png" height="150"/>
       <label
-        class="info"
+        class="info form-label"
         horizontalAlignment="center"
         verticalAlignment="middle"
         textWrap="true"
         text="Iniciar sesi&oacute;n"
         height="80"
         marginTop="3%" />
-      <textField hint="Email" keyboardType="email" marginTop="3%" bind:text="{user}" />
+      <textField class="form-input" style="color: black;" hint="Email" keyboardType="email" marginTop="3%" bind:text="{user}" />
       <textField
+        style="color: black;"
         hint="Password"
         secure="true"
         marginTop="3%"
         bind:text="{pass}"
         returnKeyType="done" />
-      <button text="Ingresar" class="-success -outline btn" marginTop="20%" on:tap="{clickButton}" />
+      <button text="Ingresar" class="-success btn" marginTop="20%" on:tap="{clickButton}" />
     </stackLayout>
 </page>
 

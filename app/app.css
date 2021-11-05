@@ -14,14 +14,29 @@ The imported CSS rules must precede all other types of rules.
 @import '~@nativescript/theme/css/default.css';
 @import './font-awesome.css';
 
+.mtop-16{
+  margin-top: 16px;
+}
+.mtop-32{
+  margin-top: 32px;
+}
+.title{
+  background: white;
+  color: black;
+}
 .body {
   background: white;
   color:black;
 }
-
 .btn {
   border-radius: 20px;
   background: rgb(68, 134, 2);
   border: 0px;
   color: white;
+}
+.form-label{
+  color: black;
+}
+.form-input{
+  color: black !important;
 }

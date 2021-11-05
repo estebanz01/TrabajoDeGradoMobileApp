@@ -142,6 +142,6 @@
       items="{cultivos}"
       bind:selectedIndex="{cultivo}"
       height="100" />
-    <button text="Continuar" class="-success -outline btn" on:tap={continuarBtn} />
+    <button text="Continuar" class="-success btn" on:tap={continuarBtn} />
   </stackLayout>
 </page>
