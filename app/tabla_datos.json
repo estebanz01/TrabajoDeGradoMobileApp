@@ -1,7 +1,7 @@
 {
   "permanentes": [],
   "transitorios": [
-    { "text": "la producción en toneladas", "id": 1 },
+    { "text": "la producción en toneladas", "id": "item1" },
     { "text": "la devisación estándar de producción", "id": 2 },
     { "text": "la cantidad de jornales", "id": 3 },
     { "text": "los jornales", "id": 4 },
