@@ -6,22 +6,22 @@
 
 
   const IngresarDatos = () => navigate({ page: TablaDatos });
-  
+
   import { Template } from 'svelte-native/components';
 
-  const tablaItems = require('~/tabla_items.json');
+  /* const tablaItems = require('~/tabla_items.json'); */
 
-  let titulo = tablaItems.results;
+  /* let titulo = tablaItems.results; */
 
-  
+
 
 	let variables = ['200', '300', '400'];
-  
+
 </script>
 <page class="body">
   <actionBar class="title" style="color: black;" title="Resumen" />
 
- 
+
     <stackLayout>
       <label
         class="info"
@@ -45,7 +45,7 @@
 
 
   <!-- <stackLayout marginTop="4%">
-    
+
     <gridLayout columns="300, 300" rows="100">
 
       <listView items={items} itemTemplateSelector={selectTemplate}>
@@ -65,6 +65,6 @@
 
     </gridLayout>
 
-    
+
   </stackLayout> -->
 </page>
