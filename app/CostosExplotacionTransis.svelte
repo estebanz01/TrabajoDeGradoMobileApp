@@ -5,6 +5,7 @@
   import TablaDatos from './TablaDatos.svelte';
   import Sqlite from 'nativescript-sqlite';
   import { Template } from 'svelte-native/components';
+  import { Utils } from '@nativescript/core';
 
   const IngresarDatos = () => navigate({ page: TablaDatos });
 
@@ -49,7 +50,7 @@
             prod_limite_inf,
             prod_limite_sup,
             user_id,
-            timestamp] = resultSet[0];
+            timestamp] = resultSet[0].map((el) => Math.round(el));
             timestamp = (new Date(timestamp)).toLocaleDateString('es-ES'); // Transform to date.
         })
         .catch((err) => console.log(err))
@@ -63,35 +64,88 @@
       );
     }
     });
-
-	let variables = ['200', '300', '400'];
 </script>
 <page class="body">
   <actionBar class="title" style="color: black;" title="Resultado" />
     <stackLayout>
-      
-      <!-- <label class="info" text="Límite inferior: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
-      <!-- <label class="info" text="Límite superior: {prod_limite_sup}" fontSize="18em" marginTop="10%" marginLeft="20%" />
-      <label class="info" text="Valor kilogramo: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
+
+      <!-- <label textWrap="true" class="info" text="Límite inferior: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
+      <!-- <label textWrap="true" class="info" text="Límite superior: {prod_limite_sup}" fontSize="18em" marginTop="10%" marginLeft="20%" />
+      <label textWrap="true" class="info" text="Valor kilogramo: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
 
       <absoluteLayout marginTop="5%">
-        <label text="Límite inferior: {prod_limite_inf}" left="10" top="10" width="180" height="60" style="font-weight: bold;"/>
-        <label text="Límite superior: {prod_limite_sup}" left="210" top="10" width="180" height="60" />
-
-        <label text="Valor kilogramo: {valor_kilogramo_inf}" left="10" top="80" width="180" height="60" />
-        <label text="Valor kilogramo: {valor_kilogramo_sup}" left="210" top="80" width="180" height="60" />
-
-        <label text="C y G variable uni: {val_cg_var_unitario_inf}" left="10" top="160" width="180" height="60" />
-        <label text="C y G variable uni: {val_cg_var_unitario_sup}" left="210" top="160" width="180" height="60" />
-
-        <label text="C y G fijo uni: {val_cg_fijo_unitario_inf}" left="10" top="240" width="180" height="60" />
-        <label text="C y G fijo uni: {val_cg_fijo_unitario_sup}" left="210" top="240" width="180" height="60" />
-
-        <label text="Costo total producción: {costo_total_prod_inf}" left="10" top="320" width="180" height="60" />
-        <label text="Costo total producción: {costo_total_prod_sup}" left="210" top="320" width="180" height="60" />
-
-        <label text="C y G variables: {cg_var}" left="10" top="400" width="180" height="60" />
-        <label text="C y G fijo: {cg_fijo}" left="210" top="400" width="180" height="60" />
+        <label textWrap="true" left="10" top="10" width="180" height="60">
+          <formattedString>
+            <span text="Límite inferior: " fontWeight="bold" />
+            <span text="{prod_limite_inf}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="210" top="10" width="180" height="60" >
+          <formattedString>
+            <span text="Límite superior: " fontWeight="bold" />
+            <span text="{prod_limite_sup}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="10" top="80" width="180" height="60">
+          <formattedString>
+            <span text="Valor kilogramo: " fontWeight="bold" />
+            <span text="{Math.floor(valor_kilogramo_inf)}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="210" top="80" width="180" height="60">
+          <formattedString>
+            <span text="Valor kilogramo: " fontWeight="bold" />
+            <span text="{valor_kilogramo_sup}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="10" top="160" width="180" height="60">
+          <formattedString>
+            <span text="C y G variable uni: " fontWeight="bold" />
+            <span text="{val_cg_var_unitario_inf}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="210" top="160" width="180" height="60">
+          <formattedString>
+            <span text="C y G variable uni: " fontWeight="bold" />
+            <span text="{val_cg_var_unitario_sup}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="10" top="240" width="180" height="60">
+          <formattedString>
+            <span text="C y G fijo uni: " fontWeight="bold" />
+            <span text="{val_cg_fijo_unitario_inf}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="210" top="240" width="180" height="60">
+          <formattedString>
+            <span text="C y G fijo uni: " fontWeight="bold" />
+            <span text="{val_cg_fijo_unitario_sup}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="10" top="320" width="180" height="60">
+          <formattedString>
+            <span text="Costo total producción: " fontWeight="bold" />
+            <span text="{costo_total_prod_inf}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="210" top="320" width="180" height="60">
+          <formattedString>
+            <span text="Costo total producción: " fontWeight="bold" />
+            <span text="{costo_total_prod_sup}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="10" top="400" width="180" height="60">
+          <formattedString>
+            <span text="C y G variables: " fontWeight="bold" />
+            <span text="{cg_var}" />
+          </formattedString>
+        </label>
+        <label textWrap="true" left="210" top="400" width="180" height="60">
+          <formattedString>
+            <span text="C y G fijo: " fontWeight="bold" />
+            <span text="{cg_fijo}" />
+          </formattedString>
+        </label>
 
       </absoluteLayout>
 
@@ -106,10 +160,10 @@
 
       <!-- <listView items="{variables}" title>
         <Template let:item let:title>
-          <label text="{item.text}: {item}" marginTop="10%"/>
+          <label textWrap="true" text="{item.text}: {item}" marginTop="10%"/>
         </Template>
         <Template let:item>
-          <label text="Costos y gastos fijos {item}" marginTop="10%"/>
+          <label textWrap="true" text="Costos y gastos fijos {item}" marginTop="10%"/>
         </Template>
       </listView> -->
 
@@ -124,16 +178,16 @@
 
       <listView items={items} itemTemplateSelector={selectTemplate}>
         <Template let:item key="cg_variables">
-            <label class="info" text="Costos y gastos variables: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
+            <label textWrap="true" class="info" text="Costos y gastos variables: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
         </Template>
         <Template let:item key="cg_fijos">
-            <label class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
+            <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
         </Template>
         <Template let:item key="lim_inf">
-          <label class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
+          <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
         </Template>
         <Template let:item key="cg_fijos">
-          <label class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
+          <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
         </Template>
       </listView>
 
