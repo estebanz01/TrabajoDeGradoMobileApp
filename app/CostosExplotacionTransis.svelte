@@ -13,13 +13,44 @@
     Sqlite.copyDatabase("database.sqlite");
   }
 
-  let firstValueHere = null;
+  let id = null,
+    valor_kilogramo_inf = null,
+    valor_kilogramo_sup = null,
+    val_cg_var_unitario_inf = null,
+    val_cg_var_unitario_sup = null,
+    val_cg_fijo_unitario_inf = null,
+    val_cg_fijo_unitario_sup = null,
+    costo_total_prod_inf = null,
+    costo_total_prod_sup = null,
+    cg_var = null,
+    cg_fijo = null,
+    prod_limite_inf = null,
+    prod_limite_sup = null,
+    user_id = null,
+    timestamp = null;
+
   new Sqlite("database.sqlite", function(err, db) {
     if (!err) {
       db.all("SELECT * FROM c_transitorios ORDER BY timestamp DESC LIMIT 1")
         .then((resultSet) => {
           console.log(resultSet);
-          firstValueHere = resultSet[0][0];
+          [
+            id,
+            valor_kilogramo_inf,
+            valor_kilogramo_sup,
+            val_cg_var_unitario_inf,
+            val_cg_var_unitario_sup,
+            val_cg_fijo_unitario_inf,
+            val_cg_fijo_unitario_sup,
+            costo_total_prod_inf,
+            costo_total_prod_sup,
+            cg_var,
+            cg_fijo,
+            prod_limite_inf,
+            prod_limite_sup,
+            user_id,
+            timestamp] = resultSet[0];
+            timestamp = (new Date(timestamp)).toLocaleDateString('es-ES'); // Transform to date.
         })
         .catch((err) => console.log(err))
     } else {
@@ -40,7 +71,7 @@
     <stackLayout>
       <label
         class="info"
-        text="{firstValueHere}"
+        text="{timestamp}"
         horizontalAlignment="center"
         verticalAlignment="middle"
         textWrap="true"
