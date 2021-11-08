@@ -67,33 +67,53 @@
 	let variables = ['200', '300', '400'];
 </script>
 <page class="body">
-  <actionBar class="title" style="color: black;" title="Resumen" />
+  <actionBar class="title" style="color: black;" title="Resultado" />
     <stackLayout>
-      <label
+      
+      <!-- <label class="info" text="Límite inferior: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
+      <!-- <label class="info" text="Límite superior: {prod_limite_sup}" fontSize="18em" marginTop="10%" marginLeft="20%" />
+      <label class="info" text="Valor kilogramo: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
+
+      <absoluteLayout marginTop="5%">
+        <label text="Límite inferior: {prod_limite_inf}" left="10" top="10" width="180" height="60" style="font-weight: bold;"/>
+        <label text="Límite superior: {prod_limite_sup}" left="210" top="10" width="180" height="60" />
+
+        <label text="Valor kilogramo: {valor_kilogramo_inf}" left="10" top="80" width="180" height="60" />
+        <label text="Valor kilogramo: {valor_kilogramo_sup}" left="210" top="80" width="180" height="60" />
+
+        <label text="C y G variable uni: {val_cg_var_unitario_inf}" left="10" top="160" width="180" height="60" />
+        <label text="C y G variable uni: {val_cg_var_unitario_sup}" left="210" top="160" width="180" height="60" />
+
+        <label text="C y G fijo uni: {val_cg_fijo_unitario_inf}" left="10" top="240" width="180" height="60" />
+        <label text="C y G fijo uni: {val_cg_fijo_unitario_sup}" left="210" top="240" width="180" height="60" />
+
+        <label text="Costo total producción: {costo_total_prod_inf}" left="10" top="320" width="180" height="60" />
+        <label text="Costo total producción: {costo_total_prod_sup}" left="210" top="320" width="180" height="60" />
+
+        <label text="C y G variables: {cg_var}" left="10" top="400" width="180" height="60" />
+        <label text="C y G fijo: {cg_fijo}" left="210" top="400" width="180" height="60" />
+
+      </absoluteLayout>
+
+      <!-- <label
         class="info"
-        text="{timestamp}"
-        horizontalAlignment="center"
+        text="{prod_limite_inf}"
+        horizontalAlignment="rigth"
         verticalAlignment="middle"
         textWrap="true"
-        fontSize="20em"
-        marginTop="3%" />
-      <label
-        class="info"
-        text="Resultado"
-        horizontalAlignment="center"
-        verticalAlignment="middle"
-        textWrap="true"
-        fontSize="20em"
-        marginTop="3%" />
-      <listView items="{variables}" title>
+        fontSize="16em"
+        marginTop="3%" /> -->
+
+      <!-- <listView items="{variables}" title>
         <Template let:item let:title>
           <label text="{item.text}: {item}" marginTop="10%"/>
         </Template>
         <Template let:item>
           <label text="Costos y gastos fijos {item}" marginTop="10%"/>
         </Template>
-      </listView>
-      <button text="Descargar resumen PDF" class="-success  btn" marginTop="20%" />
+      </listView> -->
+
+      <button text="Descargar resumen PDF" class="-success  btn" marginTop="10%" />
       <button text="Ingresar nuevos datos" class="-success  btn" marginTop="3%" on:tap="{IngresarDatos}" />
     </stackLayout>
 
