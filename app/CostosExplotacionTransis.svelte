@@ -3,26 +3,49 @@
   import ExplotacionAgricola from './ExplotacionAgricola.svelte'
   import Tabla from './ExplotacionAgricola.svelte'
   import TablaDatos from './TablaDatos.svelte';
-
+  import Sqlite from 'nativescript-sqlite';
+  import { Template } from 'svelte-native/components';
 
   const IngresarDatos = () => navigate({ page: TablaDatos });
 
-  import { Template } from 'svelte-native/components';
+  // We need to copy the database to a special folder in the device
+  if (!Sqlite.exists("database.sqlite")) {
+    Sqlite.copyDatabase("database.sqlite");
+  }
 
-  /* const tablaItems = require('~/tabla_items.json'); */
-
-  /* let titulo = tablaItems.results; */
-
-
+  let firstValueHere = null;
+  new Sqlite("database.sqlite", function(err, db) {
+    if (!err) {
+      db.all("SELECT * FROM c_transitorios ORDER BY timestamp DESC LIMIT 1")
+        .then((resultSet) => {
+          console.log(resultSet);
+          firstValueHere = resultSet[0][0];
+        })
+        .catch((err) => console.log(err))
+    } else {
+      alert(
+        {
+          title: 'Conexión',
+          message: 'Tenemos problemas para conectarnos con la base de datos :c',
+          okButtonText: 'OK'
+        }
+      );
+    }
+    });
 
 	let variables = ['200', '300', '400'];
-
 </script>
 <page class="body">
   <actionBar class="title" style="color: black;" title="Resumen" />
-
-
     <stackLayout>
+      <label
+        class="info"
+        text="{firstValueHere}"
+        horizontalAlignment="center"
+        verticalAlignment="middle"
+        textWrap="true"
+        fontSize="20em"
+        marginTop="3%" />
       <label
         class="info"
         text="Resultado"
