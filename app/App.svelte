@@ -21,6 +21,7 @@
         [user.toLowerCase(), pass]
       ).then(row => {
         if (row != null && row.length == 1) {
+            global.userNameId = row[0];
             alert(
               { title: 'Inicio de sesión', message: 'Bienvenido.', okButtonText: 'OK' }
             ).then(() => {
