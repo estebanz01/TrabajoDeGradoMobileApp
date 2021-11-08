@@ -10,8 +10,10 @@
   let variables = tablaVariablesDatos.transitorios;
   import { goBack } from 'svelte-native'
 
-  Sqlite.copyDatabase("database.sqlite");
-
+  // We need to copy the database to a special folder in the device
+  if (!Sqlite.exists("database.sqlite")) {
+    Sqlite.copyDatabase("database.sqlite");
+  }
 
   let item1 = null;
   let item2 = null;
@@ -36,8 +38,8 @@
   let item21 = null;
   let item22 = null;
 
-  
-  
+  console.log(global.userNameId);
+
 	const continuarResultado = () =>{
 
     // CALCULO DE DATOS
@@ -81,38 +83,44 @@
     let costo_total_prod_inf = total_estado_nat;
     let costo_total_prod_sup = total_estado_nat;
 
+    let valores = [
+      valor_kilogramo_inf,
+      valor_kilogramo_sup,
+      val_cg_var_unitario_inf,
+      val_cg_var_unitario_sup,
+      val_cg_fijo_unitario_inf,
+      val_cg_fijo_unitario_sup,
+      costo_total_prod_inf,
+      costo_total_prod_sup,
+      cg_var,
+      cg_fijo,
+      prod_limite_inf,
+      prod_limite_sup,
+    ].map((el) => parseFloat(el));
+
+    valores.push(parseInt(global.userNameId, 10), Date.now());
+
     //  -------------------------------------------------------------------
 
     new Sqlite("database.sqlite", function(err, db) {
-      let conn = Sqlite.isSqlite(db) ? "Yes" : "No";
-      if(conn == "Yes"){
-        db.execSQL("CREATE TABLE IF NOT EXISTS c_transistorios (id INT(11), valor_kilogramo_inf VARCHAR(255), valor_kilogramo_sup VARCHAR(255), val_cg_var_unitario_inf VARCHAR(255), val_cg_var_unitario_sup VARCHAR(255), val_cg_fijo_unitario_inf VARCHAR(255), val_cg_fijo_unitario_sup VARCHAR(255), costo_total_prod_inf VARCHAR(255), costo_total_prod_sup VARCHAR(255), cg_var VARCHAR(255), cg_fijo VARCHAR(255), prod_limite_inf VARCHAR(255), prod_limite_sup VARCHAR(255))", function(err, table){
-          console.log("Nueva tabla:", table);
-        });
-        const ins = db.execSQL("INSERT INTO c_transistorios (valor_kilogramo_inf, valor_kilogramo_sup, val_cg_var_unitario_inf, val_cg_var_unitario_sup, val_cg_fijo_unitario_inf, val_cg_fijo_unitario_sup, costo_total_prod_inf, costo_total_prod_sup, cg_var, cg_fijo, prod_limite_inf, prod_limite_sup) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", ["20000","30000","40000","50000","60000","70000","80000","90000","22000","33000", "44000", "55000"], function(err, id) {
-          console.log("The new record id is:", id);
-        });
-        db.all(
-          "SELECT * FROM c_transistorios", function(err, resultSet) {
-            console.log("Result set is:", resultSet);
-          }
-        );
-        // .then(row => {
-        //   alert(
-        //     { 
-        //       title: 'Conexión', 
-        //       message: 'Resultado: '+row, 
-        //       okButtonText: 'OK' 
-        //     }
-        //   );
-        // })
-        navigate({ page: CostosExplotacionTransis })
-      }else{
+      if (!err) {
+        const ins = db.execSQL(
+          "INSERT INTO c_transitorios (valor_kilogramo_inf, valor_kilogramo_sup, val_cg_var_unitario_inf, val_cg_var_unitario_sup, val_cg_fijo_unitario_inf, val_cg_fijo_unitario_sup, costo_total_prod_inf, costo_total_prod_sup, cg_var, cg_fijo, prod_limite_inf, prod_limite_sup, user_id, timestamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+          valores
+        ).then((id) => {
+          db.all(
+            "SELECT * FROM c_transitorios", function(err, resultSet) {
+              console.log("Result set is:", resultSet);
+              navigate({ page: CostosExplotacionTransis });
+            }
+          );
+        }).catch((err) => console.log(err));
+      } else {
         alert(
-          { 
-            title: 'Conexión', 
-            message: 'Tenemos problemas para conectarnos con la base de datos :c', 
-            okButtonText: 'OK' 
+          {
+            title: 'Conexión',
+            message: 'Tenemos problemas para conectarnos con la base de datos :c',
+            okButtonText: 'OK'
           }
         );
       }
@@ -170,7 +178,6 @@
       <label class="form-label" text="Prestaciones sociales" textWrap="true" fontSize="16em" marginTop="10%" marginLeft="4%"/>
       <textField keyboardType="number" style="color: black;" hint="Valor" bind:text="{item22}"/>
       <button text="Continuar" class="-success  btn" marginTop="10%" on:tap="{continuarResultado}" />
-      
     </stackLayout>
   </scrollView>
   <!-- <gridLayout>
