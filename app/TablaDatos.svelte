@@ -3,11 +3,14 @@
   import { navigate } from 'svelte-native'
   import { Template } from 'svelte-native/components';
   import CostosExplotacionTransis from './CostosExplotacionTransis.svelte';
+  import Sqlite from 'nativescript-sqlite';
 
   const tablaVariablesDatos = require('~/tabla_datos.json');
 
   let variables = tablaVariablesDatos.transitorios;
   import { goBack } from 'svelte-native'
+
+  Sqlite.copyDatabase("database.sqlite");
 
 
   let item1 = null;
@@ -31,17 +34,90 @@
   let item19 = null;
   let item20 = null;
   let item21 = null;
+  let item22 = null;
+
+  
   
 	const continuarResultado = () =>{
-    
-    alert(
-            {
-              title: 'Valor',
-              message: item1+" "+item2+" "+item3+" "+item4+" "+item5+" "+item6+" "+item7+" "+item8+" "+item9+" "+item10+" "+item11+" "+item12,
-              okButtonText: 'OK'
-            }
-          );
-    // navigate({ page: CostosExplotacionTransis }, {uno : "1"});
+
+    // CALCULO DE DATOS
+    let mod = (item3*item4)*item22;
+    let salario_admin = item16*item22;
+    let val_semillas = item19*item20;
+    let total_costos_var = mod+item5+item6+item7+item9+item10+item11+item12+item13+item14+item15+salario_admin+item17+item18+val_semillas;
+
+    let val_depreciasiones = (item14/12)*0;
+    let total_costos_fijos = item8+item10+val_depreciasiones;
+
+    let total_gastos_var = item11+item12+item18;
+
+    let total_gastos_fijos = item13+item17;
+
+    let cg_var = total_costos_var+total_gastos_var;
+
+    let cg_fijo = total_costos_fijos+total_gastos_fijos;
+
+    let limite_inf = item1-item2;
+
+    let limite_sup = item1+item2;
+
+    let rel_tierra = item10;
+    let rem_trabajo = mod+salario_admin;
+    let medios_pn_consumida = item5+item6+item7+val_semillas;
+    let duraderos = val_depreciasiones;
+    let serv_externos = item9+item15;
+    let gastos_operacionales = item11+item12+item13+item17+item18;
+    let total_estado_nat = rel_tierra+rem_trabajo+medios_pn_consumida+duraderos+serv_externos+gastos_operacionales;
+
+    let valor_kilogramo_inf = total_estado_nat/(limite_inf*1000);
+    let valor_kilogramo_sup = total_estado_nat/(limite_sup*1000);
+
+    let val_cg_var_unitario_inf = cg_var/(limite_inf*1000);
+    let val_cg_var_unitario_sup = cg_var/(limite_sup*1000);
+
+    let val_cg_fijo_fijo_unitario_inf = cg_fijo/(limite_inf*1000);
+    let val_cg_fijo_fijo_unitario_sup = cg_fijo/(limite_sup*1000);
+
+    let costo_total_prod_inf = total_estado_nat;
+    let costo_total_prod_sup = total_estado_nat;
+
+    //  -------------------------------------------------------------------
+
+    new Sqlite("database.sqlite", function(err, db) {
+      let conn = Sqlite.isSqlite(db) ? "Yes" : "No";
+      if(conn == "Yes"){
+        db.execSQL("CREATE TABLE IF NOT EXISTS c_transistorios (id INT(11), limite_inf VARCHAR(255), limite_sup VARCHAR(255), valor_kilogramo_inf VARCHAR(255), valor_kilogramo_sup VARCHAR(255), valor_cg_variable_inf VARCHAR(255), valor_cg_variable_sup VARCHAR(255), costo_total_inf VARCHAR(255), costo_total_sup VARCHAR(255), cg_variables VARCHAR(255), cg_fijos VARCHAR(255), produccion_lim_inf VARCHAR(255), produccion_lim_sup VARCHAR(255))", function(err, table){
+          console.log("Nueva tabla:", table);
+        });
+        const ins = db.execSQL("INSERT INTO c_transistorios (limite_inf, limite_sup, valor_kilogramo_inf, valor_kilogramo_sup, valor_cg_variable_inf, valor_cg_variable_sup, costo_total_inf, costo_total_sup, cg_variables, cg_fijos, produccion_lim_inf, produccion_lim_sup) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", ["20000","30000","40000","50000","60000","70000","80000","90000","22000","33000", "44000", "55000"], function(err, id) {
+          console.log("The new record id is:", id);
+        });
+        db.all(
+          "SELECT * FROM c_transistorios", function(err, resultSet) {
+            console.log("Result set is:", resultSet);
+          }
+        );
+        // .then(row => {
+        //   alert(
+        //     { 
+        //       title: 'Conexión', 
+        //       message: 'Resultado: '+row, 
+        //       okButtonText: 'OK' 
+        //     }
+        //   );
+        // })
+        navigate({ page: CostosExplotacionTransis })
+      }else{
+        alert(
+          { 
+            title: 'Conexión', 
+            message: 'Tenemos problemas para conectarnos con la base de datos :c', 
+            okButtonText: 'OK' 
+          }
+        );
+      }
+    });
+
   };
 
 </script>
@@ -91,7 +167,10 @@
       <textField keyboardType="number" style="color: black;" hint="Valor" bind:text="{item20}"/>
       <label class="form-label" text="Ingrese el valor del uso estimado de la tierra" textWrap="true" />
       <textField keyboardType="number" style="color: black;" hint="Valor" bind:text="{item21}"/>
+      <label class="form-label" text="Prestaciones sociales" textWrap="true" />
+      <textField keyboardType="number" style="color: black;" hint="Valor" bind:text="{item22}"/>
       <button text="Continuar" class="-success  btn" marginTop="20%" on:tap="{continuarResultado}" />
+      
     </stackLayout>
   </scrollView>
   <!-- <gridLayout>
