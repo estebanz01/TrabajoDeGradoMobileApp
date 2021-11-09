@@ -21,7 +21,10 @@
     let filePath = new GeneratePdf().createPdf(content.nativeView, 'reporte-costos-transitorios');
     content.reload();
     console.log(filePath);
-    alert(`Reporte generado correctamente.\nAlmacenado en ${filePath}.pdf`);
+
+    if (global.isIOS) {
+      alert(`Reporte generado correctamente.\nAlmacenado en ${filePath}`);
+    }
   };
 
   let dbPromise = new Sqlite("database.sqlite", { readOnly: true });
