@@ -4,8 +4,6 @@ const HTMLTableWithValues = (values) => {
   }
 
   let concepts = [
-    'Límite inferior',
-    'Límite superior',
     'Valor kilogramo (Mínimo)',
     'Valor kilogramo (Máximo)',
     'Valor costos y gastos variables (Mínimo por unidad)',
@@ -15,7 +13,9 @@ const HTMLTableWithValues = (values) => {
     'Costo mínimo total de producción',
     'Costo máximo total de producción',
     'Gastos y costos variables totales',
-    'Gastos y costos fijos totales'
+    'Gastos y costos fijos totales',
+    'Límite inferior',
+    'Límite superior'
   ];
 
   let baseHTML = `<!doctype HTML>
