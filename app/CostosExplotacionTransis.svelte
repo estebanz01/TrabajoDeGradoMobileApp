@@ -6,14 +6,11 @@
   import Sqlite from 'nativescript-sqlite';
   import { Template } from 'svelte-native/components';
   import { Utils } from '@nativescript/core';
-
   const IngresarDatos = () => navigate({ page: TablaDatos });
-
   // We need to copy the database to a special folder in the device
   if (!Sqlite.exists("database.sqlite")) {
     Sqlite.copyDatabase("database.sqlite");
   }
-
   let id = null,
     valor_kilogramo_inf = null,
     valor_kilogramo_sup = null,
@@ -29,7 +26,6 @@
     prod_limite_sup = null,
     user_id = null,
     timestamp = null;
-
   new Sqlite("database.sqlite", function(err, db) {
     if (!err) {
       db.all("SELECT * FROM c_transitorios ORDER BY timestamp DESC LIMIT 1")
@@ -100,25 +96,25 @@
         </label>
         <label textWrap="true" left="10" top="160" width="180" height="60">
           <formattedString>
-            <span text="C y G variable uni: " fontWeight="bold" />
+            <span text="Valor C y G variable uni: " fontWeight="bold" />
             <span text="{val_cg_var_unitario_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="160" width="180" height="60">
           <formattedString>
-            <span text="C y G variable uni: " fontWeight="bold" />
+            <span text="Valor C y G variable uni: " fontWeight="bold" />
             <span text="{val_cg_var_unitario_sup}" />
           </formattedString>
         </label>
         <label textWrap="true" left="10" top="240" width="180" height="60">
           <formattedString>
-            <span text="C y G fijo uni: " fontWeight="bold" />
+            <span text="Valor C y G fijo uni: " fontWeight="bold" />
             <span text="{val_cg_fijo_unitario_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="240" width="180" height="60">
           <formattedString>
-            <span text="C y G fijo uni: " fontWeight="bold" />
+            <span text="Valor C y G fijo uni: " fontWeight="bold" />
             <span text="{val_cg_fijo_unitario_sup}" />
           </formattedString>
         </label>
@@ -173,9 +169,7 @@
 
 
   <!-- <stackLayout marginTop="4%">
-
     <gridLayout columns="300, 300" rows="100">
-
       <listView items={items} itemTemplateSelector={selectTemplate}>
         <Template let:item key="cg_variables">
             <label textWrap="true" class="info" text="Costos y gastos variables: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
@@ -190,9 +184,6 @@
           <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
         </Template>
       </listView>
-
     </gridLayout>
-
-
   </stackLayout> -->
 </page>
