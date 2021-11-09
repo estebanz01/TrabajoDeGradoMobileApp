@@ -53,7 +53,9 @@
             prod_limite_inf,
             prod_limite_sup,
             user_id,
-            timestamp] = resultSet[0].map((el) => Math.round(el));
+            timestamp] = resultSet[0].map((el) => {
+              return parseInt(el * 1000 + 0.5, 10) / 1000.0;
+            });
             timestamp = (new Date(timestamp)).toLocaleDateString('es-ES'); // Transform to date.
         })
         .catch((err) => console.log(err))
@@ -92,7 +94,7 @@
         <label textWrap="true" left="10" top="80" width="180" height="60">
           <formattedString>
             <span text="Valor kilogramo: " fontWeight="bold" />
-            <span text="{Math.floor(valor_kilogramo_inf)}" />
+            <span text="{valor_kilogramo_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="80" width="180" height="60">
