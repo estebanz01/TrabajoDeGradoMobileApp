@@ -2,13 +2,14 @@
   import { alert } from '@nativescript/core/ui/dialogs';
   import { navigate } from 'svelte-native'
   import { Template } from 'svelte-native/components';
-  import CostosExplotacionTransis from './CostosExplotacionTransis.svelte';
+  import { goBack } from 'svelte-native'
   import Sqlite from 'nativescript-sqlite';
+
+  import CostosExplotacionTransis from './CostosExplotacionTransis.svelte';
 
   const tablaVariablesDatos = require('~/tabla_datos.json');
 
   let variables = tablaVariablesDatos.transitorios;
-  import { goBack } from 'svelte-native'
 
   // We need to copy the database to a special folder in the device
   if (!Sqlite.exists("database.sqlite")) {
@@ -37,8 +38,6 @@
   let item20 = null;
   let item21 = null;
   let item22 = null;
-
-  console.log(global.userNameId);
 
 	const continuarResultado = () =>{
 
@@ -111,32 +110,23 @@
     if(item22 == null){
       item22 = 0;
     }
-    
+
     // CALCULO DE DATOS
     let mod = (item3*item4)*item22;
     let salario_admin = item16*item22;
     let val_semillas = item19*item20;
     let total_costos_var = mod+parseFloat(item5)+parseFloat(item6)+parseFloat(item7)+parseFloat(item9)+parseFloat(item15)+salario_admin+val_semillas;
-    console.log("mod "+mod);
-    console.log("salario admin "+salario_admin);
-    console.log("valor semillas "+val_semillas);
-    console.log("total_costos_var "+total_costos_var);
 
     let val_depreciasiones = (parseFloat(item14)/12)*0;
     let total_costos_fijos = parseFloat(item8)+parseFloat(item10)+val_depreciasiones;
-    console.log("total_costos_fijos "+total_costos_fijos);
 
     let total_gastos_var = parseFloat(item11)+parseFloat(item12)+parseFloat(item18);
-    console.log("total_gastos_var "+total_gastos_var);
 
     let total_gastos_fijos = parseFloat(item13)+parseFloat(item17);
-    console.log("total_gastos_fijos "+total_gastos_fijos);
 
     let cg_var = parseFloat(total_costos_var)+parseFloat(total_gastos_var);
-    console.log("Costos y gastos var "+cg_var);
 
     let cg_fijo = total_costos_fijos+total_gastos_fijos;
-    console.log("Costos y gastos fijos "+cg_fijo);
 
     let prod_limite_inf = parseFloat(item1)-parseFloat(item2);
 
@@ -149,23 +139,18 @@
     let serv_externos = parseFloat(item9)+parseFloat(item15);
     let gastos_operacionales = parseFloat(item11)+parseFloat(item12)+parseFloat(item13)+parseFloat(item17)+parseFloat(item18);
     let total_estado_nat = rel_tierra+rem_trabajo+medios_pn_consumida+duraderos+serv_externos+gastos_operacionales;
-    console.log("Estado naturaleza: "+total_estado_nat);
 
     let valor_kilogramo_inf = total_estado_nat/(prod_limite_inf*1000);
     let valor_kilogramo_sup = total_estado_nat/(prod_limite_sup*1000);
-    console.log("Valor kilo inf: "+valor_kilogramo_inf);
 
     let val_cg_var_unitario_inf = cg_var/(prod_limite_inf*1000);
     let val_cg_var_unitario_sup = cg_var/(prod_limite_sup*1000);
-    console.log("Límite inf "+val_cg_var_unitario_inf);
 
     let val_cg_fijo_unitario_inf = cg_fijo/(prod_limite_inf*1000);
     let val_cg_fijo_unitario_sup = cg_fijo/(prod_limite_sup*1000);
 
     let costo_total_prod_inf = total_estado_nat;
     let costo_total_prod_sup = total_estado_nat;
-
-    console.log("ITEM1: "+item1+" ITEM2: "+item2+" ITEM3: "+item3+" ITEM4: "+item4+" ITEM5: "+item5+" ITEM6: "+item6+" ITEM7: "+item7+" ITEM8: "+item8+" ITEM9: "+item9+" ITEM10: "+item10+" ITEM11: "+item11+" ITEM12: "+item12+" ITEM13: "+item13+" ITEM14: "+item14+" ITEM15: "+item15+" ITEM16: "+item16+" ITEM17: "+item17+" ITEM18: "+item18+" ITEM19: "+item19+" ITEM20: "+item20+" ITEM21: "+item21+" ITEM22: "+item22);
 
     let valores = [
       valor_kilogramo_inf,
@@ -192,12 +177,8 @@
           "INSERT INTO c_transitorios (valor_kilogramo_inf, valor_kilogramo_sup, val_cg_var_unitario_inf, val_cg_var_unitario_sup, val_cg_fijo_unitario_inf, val_cg_fijo_unitario_sup, costo_total_prod_inf, costo_total_prod_sup, cg_var, cg_fijo, prod_limite_inf, prod_limite_sup, user_id, timestamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
           valores
         ).then((id) => {
-          db.all(
-            "SELECT * FROM c_transitorios", function(err, resultSet) {
-              console.log("Result set is:", resultSet);
-              navigate({ page: CostosExplotacionTransis });
-            }
-          );
+          global.LastInsertedCostId = id;
+          navigate({ page: CostosExplotacionTransis });
         }).catch((err) => console.log(err));
       } else {
         alert(
@@ -209,7 +190,6 @@
         );
       }
     });
-
   };
 
 </script>
@@ -267,24 +247,4 @@
       </stackLayout>
     </scrollView>
   </gridLayout>
-  
-  
-  <!-- <gridLayout>
-      <label
-        class="info"
-        text=""
-        horizontalAlignment="center"
-        verticalAlignment="middle"
-        textWrap="true"
-        height="80"
-        fontSize="40em"
-        marginTop="3%" />
-      <listView items="{variables}">
-        <Template let:item>
-          <label class="form-label" text="Ingrese el valor de {item.text}" textWrap="true" />
-          <textField keyboardType="number" style="color: black;" hint="Valor {item.id}" bind:text="{item1}"/>
-        </Template>
-      </listView>
-      <button text="Continuar" class="-success  btn" marginTop="80%" on:tap="{continuarResultado}" />
-  </gridLayout> -->
 </page>
