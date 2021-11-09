@@ -1,16 +1,22 @@
 <script>
   import { navigate } from 'svelte-native'
+  import { Template } from 'svelte-native/components';
+  import { Utils } from '@nativescript/core';
+  import Sqlite from 'nativescript-sqlite';
+
   import ExplotacionAgricola from './ExplotacionAgricola.svelte'
   import Tabla from './ExplotacionAgricola.svelte'
   import TablaDatos from './TablaDatos.svelte';
-  import Sqlite from 'nativescript-sqlite';
-  import { Template } from 'svelte-native/components';
-  import { Utils } from '@nativescript/core';
+  import VisualizadorPDF from './VisualizadorPDF.svelte';
+
   const IngresarDatos = () => navigate({ page: TablaDatos });
+  const visualizarPDF = () => navigate({ page: VisualizadorPDF });
+
   // We need to copy the database to a special folder in the device
   if (!Sqlite.exists("database.sqlite")) {
     Sqlite.copyDatabase("database.sqlite");
   }
+
   let id = null,
     valor_kilogramo_inf = null,
     valor_kilogramo_sup = null,
@@ -26,6 +32,7 @@
     prod_limite_sup = null,
     user_id = null,
     timestamp = null;
+
   new Sqlite("database.sqlite", function(err, db) {
     if (!err) {
       db.all("SELECT * FROM c_transitorios ORDER BY timestamp DESC LIMIT 1")
@@ -145,45 +152,7 @@
 
       </absoluteLayout>
 
-      <!-- <label
-        class="info"
-        text="{prod_limite_inf}"
-        horizontalAlignment="rigth"
-        verticalAlignment="middle"
-        textWrap="true"
-        fontSize="16em"
-        marginTop="3%" /> -->
-
-      <!-- <listView items="{variables}" title>
-        <Template let:item let:title>
-          <label textWrap="true" text="{item.text}: {item}" marginTop="10%"/>
-        </Template>
-        <Template let:item>
-          <label textWrap="true" text="Costos y gastos fijos {item}" marginTop="10%"/>
-        </Template>
-      </listView> -->
-
-      <button text="Descargar resumen PDF" class="-success  btn" marginTop="10%" />
+      <button text="Descargar resumen PDF" class="-success  btn" marginTop="10%" on:tap="{visualizarPDF}" />
       <button text="Ingresar nuevos datos" class="-success  btn" marginTop="3%" on:tap="{IngresarDatos}" />
     </stackLayout>
-
-
-  <!-- <stackLayout marginTop="4%">
-    <gridLayout columns="300, 300" rows="100">
-      <listView items={items} itemTemplateSelector={selectTemplate}>
-        <Template let:item key="cg_variables">
-            <label textWrap="true" class="info" text="Costos y gastos variables: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
-        </Template>
-        <Template let:item key="cg_fijos">
-            <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
-        </Template>
-        <Template let:item key="lim_inf">
-          <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
-        </Template>
-        <Template let:item key="cg_fijos">
-          <label textWrap="true" class="info" text="Costos y gastos fijos: {item}" fontSize="14em" marginTop="10%" marginLeft="4%" />
-        </Template>
-      </listView>
-    </gridLayout>
-  </stackLayout> -->
 </page>
