@@ -116,7 +116,7 @@
     let mod = (item3*item4)*item22;
     let salario_admin = item16*item22;
     let val_semillas = item19*item20;
-    let total_costos_var = mod+parseFloat(item5)+parseFloat(item6)+parseFloat(item7)+parseFloat(item9)+parseFloat(item10)+parseFloat(item11)+parseFloat(item12)+parseFloat(item13)+parseFloat(item14)+parseFloat(item15)+salario_admin+parseFloat(item17)+parseFloat(item18)+val_semillas;
+    let total_costos_var = mod+parseFloat(item5)+parseFloat(item6)+parseFloat(item7)+parseFloat(item9)+parseFloat(item15)+salario_admin+val_semillas;
     console.log("mod "+mod);
     console.log("salario admin "+salario_admin);
     console.log("valor semillas "+val_semillas);
@@ -149,17 +149,18 @@
     let serv_externos = parseFloat(item9)+parseFloat(item15);
     let gastos_operacionales = parseFloat(item11)+parseFloat(item12)+parseFloat(item13)+parseFloat(item17)+parseFloat(item18);
     let total_estado_nat = rel_tierra+rem_trabajo+medios_pn_consumida+duraderos+serv_externos+gastos_operacionales;
+    console.log("Estado naturaleza: "+total_estado_nat);
 
-    let valor_kilogramo_inf = (prod_limite_inf*1000)/total_estado_nat;
-    let valor_kilogramo_sup = (prod_limite_sup*1000)/total_estado_nat;
+    let valor_kilogramo_inf = total_estado_nat/(prod_limite_inf*1000);
+    let valor_kilogramo_sup = total_estado_nat/(prod_limite_sup*1000);
     console.log("Valor kilo inf: "+valor_kilogramo_inf);
 
-    let val_cg_var_unitario_inf = (prod_limite_inf*1000)/cg_var;
-    let val_cg_var_unitario_sup = (prod_limite_sup*1000)/cg_var;
+    let val_cg_var_unitario_inf = cg_var/(prod_limite_inf*1000);
+    let val_cg_var_unitario_sup = cg_var/(prod_limite_sup*1000);
     console.log("Límite inf "+val_cg_var_unitario_inf);
 
-    let val_cg_fijo_unitario_inf = (prod_limite_inf*1000)/cg_fijo;
-    let val_cg_fijo_unitario_sup = (prod_limite_sup*1000)/cg_fijo;
+    let val_cg_fijo_unitario_inf = cg_fijo/(prod_limite_inf*1000);
+    let val_cg_fijo_unitario_sup = cg_fijo/(prod_limite_sup*1000);
 
     let costo_total_prod_inf = total_estado_nat;
     let costo_total_prod_sup = total_estado_nat;
