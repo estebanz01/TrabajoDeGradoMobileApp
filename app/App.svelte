@@ -53,18 +53,19 @@
         verticalAlignment="middle"
         textWrap="true"
         text="Iniciar sesi&oacute;n"
-        fontSize="20em"
+        fontSize="30em"
         height="80"
         marginTop="10%" />
-      <textField class="form-input" style="color: black;" hint="Email" keyboardType="email" marginTop="3%" bind:text="{user}" />
+      <textField class="form-input" style="color: black;" hint="Email" fontSize="16em" keyboardType="email" marginTop="3%" bind:text="{user}" />
       <textField
         style="color: black;"
         hint="Password"
         secure="true"
+        fontSize="16em"
         marginTop="3%"
         bind:text="{pass}"
         returnKeyType="done" />
-      <button text="Ingresar" class="-success btn" marginTop="10%" on:tap="{clickButton}" />
+      <button text="Ingresar" class="-success btn" fontSize="16em" marginTop="6%" on:tap="{clickButton}" />
     </stackLayout>
 </page>
 
