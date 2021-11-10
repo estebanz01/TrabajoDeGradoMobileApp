@@ -61,6 +61,8 @@
     if (tipoCosecha == 1) {
       alert('Estamos trabajando fuertemente para implementar el cálculo de costos para cultivos permanentes. Pronto estará disponible.');
     } else if (tipoCosecha == 2) {
+      global.tipoCosecha = 'transitorio';
+      global.nombreCultivo = cultivos[cultivo];
       navigate({ page: TablaDatos });
     } else {
       alert('Por favor, seleccione el tipo de cosecha.');

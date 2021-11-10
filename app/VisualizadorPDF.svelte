@@ -8,6 +8,7 @@
   import Sqlite from 'nativescript-sqlite';
 
   import HTMLTableWithValues from './html_table_pdf.js';
+  import Inicio from './Inicio.svelte';
 
   let webDoc = null;
   let page = null;
@@ -46,13 +47,16 @@
     } else {
       console.log('not null');
     }
-  };
+    };
+
+  const inicioApp = () => navigate({ page: Inicio });
 </script>
 <page class="body" bind:this="{page}" actionBarHidden="true">
   <scrollView class="mtop-32">
     <stackLayout>
       <webView src="{webDoc}" id="web" loadFinished="{loaded}" width="auto" height="600" />
       <button text="Guardar en PDF" class="-success  btn mtop-32" on:tap="{generarPDF}" />
+      <button text="Finalizar" class="-success  btn mtop-32" on:tap="{inicioApp}" />
     </stackLayout>
   </scrollView>
 </page>

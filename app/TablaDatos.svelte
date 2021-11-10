@@ -167,17 +167,20 @@
       prod_limite_sup,
     ].map((el) => parseFloat(el));
 
-    valores.push(parseInt(global.userNameId, 10), Date.now());
+    valores.push(parseInt(global.userNameId, 10), Date.now(), global.tipoCosecha, global.nombreCultivo);
+
 
     //  -------------------------------------------------------------------
 
     new Sqlite("database.sqlite", function(err, db) {
       if (!err) {
         const ins = db.execSQL(
-          "INSERT INTO c_transitorios (valor_kilogramo_inf, valor_kilogramo_sup, val_cg_var_unitario_inf, val_cg_var_unitario_sup, val_cg_fijo_unitario_inf, val_cg_fijo_unitario_sup, costo_total_prod_inf, costo_total_prod_sup, cg_var, cg_fijo, prod_limite_inf, prod_limite_sup, user_id, timestamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+          "INSERT INTO c_transitorios (valor_kilogramo_inf, valor_kilogramo_sup, val_cg_var_unitario_inf, val_cg_var_unitario_sup, val_cg_fijo_unitario_inf, val_cg_fijo_unitario_sup, costo_total_prod_inf, costo_total_prod_sup, cg_var, cg_fijo, prod_limite_inf, prod_limite_sup, user_id, timestamp, tipo_cosecha, nombre_cultivo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
           valores
         ).then((id) => {
-          global.LastInsertedCostId = id;
+          global.LastInsertedCostId = id; // Store new ID in global.
+          global.tipoCosecha = null; // Empty global variables related to cultivos.
+          global.nombreCultivo = null; // Empty global variables related to cultivos.
           navigate({ page: CostosExplotacionTransis });
         }).catch((err) => console.log(err));
       } else {

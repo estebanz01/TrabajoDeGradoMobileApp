@@ -1,8 +1,10 @@
 <script>
   import { navigate } from 'svelte-native'
   import ExplotacionAgricola from './ExplotacionAgricola.svelte'
+  import TablaCalculos from './TablaCalculos.svelte'
 
   const cultivoTransitorio = () => navigate({ page: ExplotacionAgricola });
+  const calculosRealizados = () => navigate({ page: TablaCalculos });
 </script>
 <page class="body" actionBarHidden="true">
   <stackLayout>
@@ -30,5 +32,6 @@
       marginTop="10%" />
     <button text="Estado del bien producido" class="-success  btn" marginTop="20%" />
     <button text="Estado de la naturaleza" class="-success  btn" marginTop="3%" on:tap="{cultivoTransitorio}" />
+    <button text="Costeos realizados" class="-success  btn" marginTop="3%" on:tap="{calculosRealizados}" />
   </stackLayout>
 </page>
