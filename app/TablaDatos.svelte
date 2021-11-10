@@ -37,7 +37,7 @@
   let item19 = null;
   let item20 = null;
   let item21 = null;
-  let item22 = null;
+  let item22 = 1.535;
 
 	const continuarResultado = () =>{
 
