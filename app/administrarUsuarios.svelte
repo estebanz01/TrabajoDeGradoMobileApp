@@ -4,6 +4,8 @@
   import { Template } from 'svelte-native/components';
   import Sqlite from 'nativescript-sqlite';
 
+  import Inicio from './Inicio.svelte';
+
   let usuarios = [];
 
   let dbPromise = new Sqlite("database.sqlite");
@@ -42,6 +44,25 @@
         }).catch((err) => console.log('Error on connect', err));
       }).catch((err) => console.log('Ocurrió un error', err));
   };
+
+  const deleteAll = () => {
+    confirm({
+      title: 'Eliminar todos los datos.',
+      message: `¿Está seguro que desea eliminar todos los datos?\nNo hay forma de recuperarlos.`,
+      okButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((remove) => {
+      if (remove) {
+        confirm('¿Está seguro?').then((secured) => {
+          if (secured) {
+            Sqlite.deleteDatabase('database.sqlite');
+            Sqlite.copyDatabase('database.sqlite');
+            navigate({ page: Inicio });
+          }
+        }).catch((err) => console.log('error confirmando eliminar', err));
+      }
+    }).catch((err) => console.log('error intentando eliminar', err));
+  };
 </script>
 <page>
   <actionBar class="title" style="color: black;" title="Administrar usuarios" />
@@ -53,6 +74,7 @@
         <label text="Role: {item[2] === 'admin' ? 'Administrador' : 'Normal'}" />
       </Template>
     </listView>
+    <button text="Eliminar todos los datos" class="-success  btn-danger" on:tap="{deleteAll}" />
     <button text="Atras" class="-success  btn" on:tap="{goBack}" />
   </stackLayout>
 </page>
