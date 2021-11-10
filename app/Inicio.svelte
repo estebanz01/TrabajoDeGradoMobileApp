@@ -10,7 +10,7 @@
 </script>
 <page class="body" actionBarHidden="true">
   <stackLayout>
-    <gridLayout columns="300, 300" rows="100" marginTop="14%">
+    <gridLayout columns="300, 300" rows="100" marginTop="10%">
       <label
         class="info"
         text="AMCA"
@@ -30,9 +30,9 @@
       verticalAlignment="middle"
       textWrap="true"
       text="Inicio"
-      fontSize="20em"
-      marginTop="10%" />
-    <button text="Estado del bien producido" class="-success  btn" marginTop="20%" />
+      fontSize="30em"
+      marginTop="8%" />
+    <button text="Estado del bien producido" class="-success  btn" marginTop="4%" />
     <button text="Estado de la naturaleza" class="-success  btn" marginTop="3%" on:tap="{cultivoTransitorio}" />
     <button text="Costeos realizados" class="-success  btn" marginTop="3%" on:tap="{calculosRealizados}" />
     {#if global.isAdmin }
