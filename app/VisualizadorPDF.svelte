@@ -48,7 +48,7 @@
     }
   };
 </script>
-<page class="body" bind:this="{page}">
+<page class="body" bind:this="{page}" actionBarHidden="true">
   <scrollView class="mtop-32">
     <stackLayout>
       <webView src="{webDoc}" id="web" loadFinished="{loaded}" width="auto" height="600" />
