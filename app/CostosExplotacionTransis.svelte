@@ -6,11 +6,12 @@
 
   import ExplotacionAgricola from './ExplotacionAgricola.svelte'
   import Tabla from './ExplotacionAgricola.svelte'
-  import TablaDatos from './TablaDatos.svelte';
   import VisualizadorPDF from './VisualizadorPDF.svelte';
+  import Inicio from './Inicio.svelte';
 
-  const IngresarDatos = () => navigate({ page: TablaDatos });
+  const IngresarDatos = () => navigate({ page: ExplotacionAgricola });
   const visualizarPDF = () => navigate({ page: VisualizadorPDF });
+  const inicioApp = () => navigate({ page: Inicio });
 
   // We need to copy the database to a special folder in the device
   if (!Sqlite.exists("database.sqlite")) {
@@ -31,7 +32,9 @@
     prod_limite_inf = null,
     prod_limite_sup = null,
     user_id = null,
-    timestamp = null;
+    timestamp = null,
+    tipo_cosecha = null,
+    nombre_cultivo = null;
 
   new Sqlite("database.sqlite", function(err, db) {
     if (!err) {
@@ -57,6 +60,8 @@
               return parseInt(el * 1000 + 0.5, 10) / 1000.0;
             });
             timestamp = (new Date(timestamp)).toLocaleDateString('es-ES'); // Transform to date.
+            nombre_cultivo = resultSet[0].pop();
+            tipo_cosecha = resultSet[0].pop();
         })
         .catch((err) => console.log(err))
     } else {
@@ -74,11 +79,6 @@
   <actionBar class="title" style="color: black;" title="Resultado" />
   <scrollView class="mtop-32">
     <stackLayout>
-
-      <!-- <label textWrap="true" class="info" text="Límite inferior: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
-      <!-- <label textWrap="true" class="info" text="Límite superior: {prod_limite_sup}" fontSize="18em" marginTop="10%" marginLeft="20%" />
-      <label textWrap="true" class="info" text="Valor kilogramo: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
-
       <absoluteLayout>
         <label textWrap="true" left="10" top="10" width="180" height="60">
           <formattedString>
@@ -154,9 +154,9 @@
         </label>
 
       </absoluteLayout>
-
-      <button text="Descargar resumen PDF" class="-success  btn mtop-32"  on:tap="{visualizarPDF}" />
-      <button text="Ingresar nuevos datos" class="-success  btn mtop-32"  on:tap="{IngresarDatos}" />
+      <button text="Descargar resumen PDF" class="-success  btn" marginTop="10%" on:tap="{visualizarPDF}" />
+      <button text="Ingresar nuevos datos" class="-success  btn" marginTop="2%" on:tap="{IngresarDatos}" />
+      <button text="Finalizar" class="-success  btn" marginTop="2%" on:tap="{inicioApp}" />
     </stackLayout>
   </scrollView>
 </page>

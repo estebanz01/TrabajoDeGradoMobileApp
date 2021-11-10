@@ -25,6 +25,7 @@ const HTMLTableWithValues = (values) => {
     </head>
     <body>
       <h1>C&aacute;lculo de costos de producci&oacute;n.</h1>
+      <h4><small>Cultivo ${values[15]} - ${values[16]}.</small></h4>
       <p>
         A continuaci&oacute;n, su &uacute;ltimo reporte de c&aacute;lculo de costos para el cultivo transitorio.
       </p>
