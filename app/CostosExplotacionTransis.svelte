@@ -77,7 +77,7 @@
 </script>
 <page class="body">
   <actionBar class="title" style="color: black;" title="Resultado" />
-  <scrollView class="mtop-32">
+  <scrollView>
     <stackLayout>
       <absoluteLayout>
         <label textWrap="true" left="10" top="10" width="180" height="60">
