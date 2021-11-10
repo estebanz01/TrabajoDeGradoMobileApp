@@ -72,13 +72,14 @@
 </script>
 <page class="body">
   <actionBar class="title" style="color: black;" title="Resultado" />
+  <scrollView class="mtop-32">
     <stackLayout>
 
       <!-- <label textWrap="true" class="info" text="Límite inferior: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
       <!-- <label textWrap="true" class="info" text="Límite superior: {prod_limite_sup}" fontSize="18em" marginTop="10%" marginLeft="20%" />
       <label textWrap="true" class="info" text="Valor kilogramo: {prod_limite_inf}" fontSize="18em" marginTop="10%" marginLeft="20%" /> -->
 
-      <absoluteLayout marginTop="5%">
+      <absoluteLayout>
         <label textWrap="true" left="10" top="10" width="180" height="60">
           <formattedString>
             <span text="Límite inferior: " fontWeight="bold" />
@@ -94,49 +95,49 @@
         <label textWrap="true" left="10" top="80" width="180" height="60">
           <formattedString>
             <span text="Valor kilogramo: " fontWeight="bold" />
-            <span text="{valor_kilogramo_inf}" />
+            <span text="$ {valor_kilogramo_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="80" width="180" height="60">
           <formattedString>
             <span text="Valor kilogramo: " fontWeight="bold" />
-            <span text="{valor_kilogramo_sup}" />
+            <span text="$ {valor_kilogramo_sup}" />
           </formattedString>
         </label>
         <label textWrap="true" left="10" top="160" width="180" height="60">
           <formattedString>
             <span text="Valor C y G variable uni: " fontWeight="bold" />
-            <span text="{val_cg_var_unitario_inf}" />
+            <span text="$ {val_cg_var_unitario_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="160" width="180" height="60">
           <formattedString>
             <span text="Valor C y G variable uni: " fontWeight="bold" />
-            <span text="{val_cg_var_unitario_sup}" />
+            <span text="$ {val_cg_var_unitario_sup}" />
           </formattedString>
         </label>
         <label textWrap="true" left="10" top="240" width="180" height="60">
           <formattedString>
             <span text="Valor C y G fijo uni: " fontWeight="bold" />
-            <span text="{val_cg_fijo_unitario_inf}" />
+            <span text="$ {val_cg_fijo_unitario_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="240" width="180" height="60">
           <formattedString>
             <span text="Valor C y G fijo uni: " fontWeight="bold" />
-            <span text="{val_cg_fijo_unitario_sup}" />
+            <span text="$ {val_cg_fijo_unitario_sup}" />
           </formattedString>
         </label>
         <label textWrap="true" left="10" top="320" width="180" height="60">
           <formattedString>
             <span text="Costo total producción: " fontWeight="bold" />
-            <span text="{costo_total_prod_inf}" />
+            <span text="$ {costo_total_prod_inf}" />
           </formattedString>
         </label>
         <label textWrap="true" left="210" top="320" width="180" height="60">
           <formattedString>
             <span text="Costo total producción: " fontWeight="bold" />
-            <span text="{costo_total_prod_sup}" />
+            <span text="$ {costo_total_prod_sup}" />
           </formattedString>
         </label>
         <label textWrap="true" left="10" top="400" width="180" height="60">
@@ -154,7 +155,8 @@
 
       </absoluteLayout>
 
-      <button text="Descargar resumen PDF" class="-success  btn" marginTop="10%" on:tap="{visualizarPDF}" />
-      <button text="Ingresar nuevos datos" class="-success  btn" marginTop="3%" on:tap="{IngresarDatos}" />
+      <button text="Descargar resumen PDF" class="-success  btn mtop-32"  on:tap="{visualizarPDF}" />
+      <button text="Ingresar nuevos datos" class="-success  btn mtop-32"  on:tap="{IngresarDatos}" />
     </stackLayout>
+  </scrollView>
 </page>
