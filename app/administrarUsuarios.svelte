@@ -64,17 +64,19 @@
     }).catch((err) => console.log('error intentando eliminar', err));
   };
 </script>
-<page>
+<page class="body">
   <actionBar class="title" style="color: black;" title="Administrar usuarios" />
-  <stackLayout>
-    <listView items="{usuarios}" height="500" on:itemTap="{onItemTap}">
-      <Template let:item>
-        <label text="ID: {item[0]}" />
-        <label text="Username: {item[1]}" />
-        <label text="Role: {item[2] === 'admin' ? 'Administrador' : 'Normal'}" />
-      </Template>
-    </listView>
-    <button text="Eliminar todos los datos" class="-success  btn-danger" on:tap="{deleteAll}" />
-    <button text="Atras" class="-success  btn" on:tap="{goBack}" />
-  </stackLayout>
+  <scrollView>
+    <stackLayout>
+      <listView items="{usuarios}" height="500" on:itemTap="{onItemTap}">
+        <Template let:item>
+          <label text="ID: {item[0]}" />
+          <label text="Username: {item[1]}" />
+          <label text="Role: {item[2] === 'admin' ? 'Administrador' : 'Normal'}" />
+        </Template>
+      </listView>
+      <button text="Eliminar todos los datos" class="-success  btn-danger" on:tap="{deleteAll}" />
+      <button text="Atras" class="-success  btn" on:tap="{goBack}" />
+    </stackLayout>
+  </scrollView>
 </page>
