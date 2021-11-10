@@ -67,81 +67,83 @@
     }
   };
 </script>
-<page class="body">
-  <stackLayout>
-    <label
-      class="info"
-      text="Explotaci&oacute;n Agr&iacute;cola"
-      horizontalAlignment="center"
-      verticalAlignment="middle"
-      textWrap="true"
-      fontSize="40em"
-      marginTop="3%" />
-    <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
+<page class="body" actionBarHidden="true">
+  <scrollView class="mtop-32">
+    <stackLayout>
       <label
         class="info"
-        text="Tipo de Cosecha:"
-        left="10"
-        top="10"
+        text="Explotaci&oacute;n Agr&iacute;cola"
+        horizontalAlignment="center"
+        verticalAlignment="middle"
         textWrap="true"
-        fontSize="20em" />
-      <button
-        left="140"
-        top="0"
-        text="&#xf05a;"
-        class="fas js-cosecha"
-        paddingTop="-10%"
-        strech="none"
-        on:tap="{infoBtn}" />
-    </absoluteLayout>
-    <listPicker
-      items="{tipoCosechas}"
-      height="100"
-      on:selectedIndexChange="{cargarTipoCultivo}"
-      bind:selectedIndex="{tipoCosecha}" />
-    <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
-      <label
-        class="info"
-        text="Tipo de Cultivo"
-        left="10"
-        top="10"
-        textWrap="true"
-        fontSize="20em" />
-      <button
-        left="140"
-        top="0"
-        text="&#xf05a;"
-        class="fas js-tipo-cultivo"
-        paddingTop="-10%"
-        strech="none"
-        on:tap="{infoBtn}" />
-    </absoluteLayout>
-    <listPicker
-      items="{tipoCultivos}"
-      height="100"
-      on:selectedIndexChange="{cargarCultivos}"
-      bind:selectedIndex="{tipoCultivo}" />
-    <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
-      <label
-        class="info"
-        text="Cultivo"
-        left="10"
-        top="10"
-        textWrap="true"
-        fontSize="20em" />
-      <button
-        left="60"
-        top="0"
-        text="&#xf05a;"
-        class="fas js-cultivo"
-        paddingTop="-10%"
-        strech="none"
-        on:tap="{infoBtn}" />
-    </absoluteLayout>
-    <listPicker
-      items="{cultivos}"
-      bind:selectedIndex="{cultivo}"
-      height="100" />
-    <button text="Continuar" class="-success btn" on:tap={continuarBtn} />
-  </stackLayout>
+        fontSize="28em"
+        marginTop="3%" />
+      <absoluteLayout marginTop="18%" horizontalAlignment="center" verticalAlignment="middle">
+        <label
+          class="info"
+          text="Tipo de Cosecha:"
+          left="10"
+          top="10"
+          textWrap="true"
+          fontSize="20em" />
+        <button
+          left="160"
+          top="0"
+          text="&#xf05a;"
+          class="fas js-cosecha"
+          paddingTop="-10%"
+          strech="none"
+          on:tap="{infoBtn}" />
+      </absoluteLayout>
+      <listPicker
+        items="{tipoCosechas}"
+        height="100"
+        on:selectedIndexChange="{cargarTipoCultivo}"
+        bind:selectedIndex="{tipoCosecha}" />
+      <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
+        <label
+          class="info"
+          text="Tipo de Cultivo:"
+          left="10"
+          top="10"
+          textWrap="true"
+          fontSize="20em" />
+        <button
+          left="160"
+          top="0"
+          text="&#xf05a;"
+          class="fas js-tipo-cultivo"
+          paddingTop="-10%"
+          strech="none"
+          on:tap="{infoBtn}" />
+      </absoluteLayout>
+      <listPicker
+        items="{tipoCultivos}"
+        height="100"
+        on:selectedIndexChange="{cargarCultivos}"
+        bind:selectedIndex="{tipoCultivo}" />
+      <absoluteLayout marginTop="5%" horizontalAlignment="center" verticalAlignment="middle">
+        <label
+          class="info"
+          text="Cultivo:"
+          left="10"
+          top="10"
+          textWrap="true"
+          fontSize="20em" />
+        <button
+          left="160"
+          top="0"
+          text="&#xf05a;"
+          class="fas js-cultivo"
+          paddingTop="-10%"
+          strech="none"
+          on:tap="{infoBtn}" />
+      </absoluteLayout>
+      <listPicker
+        items="{cultivos}"
+        bind:selectedIndex="{cultivo}"
+        height="100" />
+      <button text="Continuar" class="-success btn" on:tap={continuarBtn} />
+    </stackLayout>
+  </scrollView>
 </page>
