@@ -15,11 +15,12 @@
   const clickButton = () => {
     new Sqlite('database.sqlite').then((db) => {
       db.get(
-        `select id from users where username = ? and password = ?`,
+        `select id, role from users where username = ? and password = ?`,
         [user.toLowerCase(), pass]
       ).then(row => {
-        if (row != null && row.length == 1) {
+        if (row != null && row.length == 2) {
             global.userNameId = row[0];
+            global.isAdmin = (row[1] === 'admin');
             alert(
               { title: 'Inicio de sesión', message: 'Bienvenido.', okButtonText: 'OK' }
             ).then(() => {
