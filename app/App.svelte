@@ -5,11 +5,9 @@
   import Sqlite from 'nativescript-sqlite';
 
   // We need to copy the database to a special folder in the device
-  if (Sqlite.exists("database.sqlite")) {
-    Sqlite.deleteDatabase("database.sqlite");
+  if (!Sqlite.exists("database.sqlite")) {
+    Sqlite.copyDatabase("database.sqlite");
   }
-
-  Sqlite.copyDatabase("database.sqlite");
 
   let user = null;
   let pass = null;
