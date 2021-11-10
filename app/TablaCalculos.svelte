@@ -37,16 +37,18 @@
       }).catch((err) => console.log('Ocurrió un error', err));
   };
 </script>
-<page>
+<page class="body">
   <actionBar class="title" style="color: black;" title="Costeos realizados" />
-  <stackLayout>
-    <listView items="{calculosRealizados}" height="500" on:itemTap="{onItemTap}">
-      <Template let:item>
-        <label text="ID: {item[0]}" />
-        <label text="Cultivo: {item[1]}" />
-        <label text="Creado: {new Date(item[2]).toLocaleString('es-CO')}" />
-      </Template>
-    </listView>
-    <button text="Atras" class="-success  btn" on:tap="{goBack}" />
-  </stackLayout>
+  <scrollView>
+    <stackLayout>
+      <listView items="{calculosRealizados}" height="500" on:itemTap="{onItemTap}">
+        <Template let:item>
+          <label text="ID: {item[0]}" />
+          <label text="Cultivo: {item[1]}" />
+          <label text="Creado: {new Date(item[2]).toLocaleString('es-CO')}" />
+        </Template>
+      </listView>
+      <button text="Atras" class="-success  btn" on:tap="{goBack}" />
+    </stackLayout>
+  </scrollView>
 </page>
