@@ -40,3 +40,10 @@ The imported CSS rules must precede all other types of rules.
 .form-input{
   color: black !important;
 }
+
+.btn-danger {
+  border-radius: 20px;
+  background: rgb(255, 42, 0);
+  border: 0px;
+  color: white;
+}
