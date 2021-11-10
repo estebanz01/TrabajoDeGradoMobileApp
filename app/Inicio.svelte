@@ -4,9 +4,9 @@
 
   const cultivoTransitorio = () => navigate({ page: ExplotacionAgricola });
 </script>
-<page class="body">
+<page class="body" actionBarHidden="true">
   <stackLayout>
-    <gridLayout columns="300, 300" rows="100">
+    <gridLayout columns="300, 300" rows="100" marginTop="14%">
       <label
         class="info"
         text="AMCA"
